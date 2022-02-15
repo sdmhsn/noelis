@@ -1,0 +1,259 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<!-- START SLIDER -->
+<header id="main-slide">
+  <div
+    id="mySlide"
+    class="carousel slide carousel-fade"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-bs-target="#mySlide"
+        data-bs-slide-to="0"
+        class="active"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#mySlide"
+        data-bs-slide-to="1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#mySlide"
+        data-bs-slide-to="2"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#mySlide"
+        data-bs-slide-to="3"
+      ></button>
+    </div>
+
+    <div class="carousel-inner text-white">
+      <div class="carousel-item active" id="slide1">
+        <div class="container">
+          <div class="d-md-block">
+            <h1 class="display-1 bg-dark px-4 pb-2 d-inline-block">
+              Welcome to<strong> Noelis</strong>
+            </h1>
+            <br />
+            <p class="bg-dark px-2 pb-1 d-inline-block">
+              Every story matters. Let's start writing yours.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" id="slide2">
+        <div class="container">
+          <div class="d-md-block text-end">
+            <h1 class="display-2 bg-dark px-4 pb-2 d-inline-block">
+              Explore<strong> Noelis</strong>
+            </h1>
+            <br />
+            <p class="bg-dark px-2 pb-1 d-inline-block">
+              Our free publishing platform for anyone authors.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" id="slide3">
+        <div class="container">
+          <div class="d-md-block">
+            <h1 class="display-2 bg-dark px-4 pb-2 d-inline-block">
+              Tell Your Story
+            </h1>
+            <br />
+            <p class="bg-dark px-2 pb-1 d-inline-block">
+              Contribute, feedback, motivation, and more with us.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" id="slide4">
+        <div class="container">
+          <div class="d-md-block text-end">
+            <h1 class="display-2 bg-dark px-4 pb-2 d-inline-block">
+              Find<strong> Articles</strong> and<strong> Authors</strong>
+            </h1>
+            <br />
+            <p class="bg-dark px-2 pb-1 d-inline-block">
+              View more published articles and best authors on our platform.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#mySlide"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#mySlide"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</header>
+<!-- END SLIDER -->
+
+<!-- START SHOWOFF 1 -->
+<section id="showoff-1" class="text-muted py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img
+          src="{% static 'images/author1.jpg' %}"
+          alt=""
+          class="img-fluid mb-3 img-thumbnail"
+        />
+      </div>
+      <div class="col-md-6 py-md-5">
+        <figure class="text-center py-md-5">
+          <blockquote class="blockquote">
+            <p>
+              “Your writing voice is the deepest possible reflection of who you
+              are. The job of your voice is not to seduce or flatter or make
+              well-shaped sentences. In your voice, your readers should be able
+              to hear the contents of your mind, your heart, your soul.”
+            </p>
+          </blockquote>
+          <figcaption class="blockquote-footer">Meg Rosoff</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END SHOWOFF 1 -->
+
+<!-- START SHOWOFF 2 -->
+<section id="showoff-2" class="bg-light text-muted py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 order-1 order-md-0 py-md-5">
+        <h2>Join With Us and Grow Together</h2>
+        <p class="lead">
+          Noelis helps you track your progress, set milestones, connect with
+          other authors in a vast community, and participate in events that are
+          designed to make sure you finish your article. Oh, and best of all,
+          it’s free!
+        </p>
+        <a href="login.html" class="btn btn-outline-dark mb-3">Sign Up</a>
+      </div>
+      <div class="col-md-6 order-0 order-md-1">
+        <img
+          src="{% static 'images/join.jpg' %}"
+          alt=""
+          class="img-fluid mb-3 img-thumbnail"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END SHOWOFF 2 -->
+
+<!-- START EXPLORE -->
+<section id="explore">
+  <div class="dark-overlay">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <div class="py-5 text-white">
+            <h1 class="display-4">Explore</h1>
+            <p class="lead">
+              Discover articles by talented authors in our platform. On the
+              other hand, you can find writing talents and facilitating
+              publishers.
+            </p>
+            <a href="{% url 'articles' %}" class="btn btn-outline-light"
+              >Find Out More</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END EXPLORE-->
+
+<!-- START MEMBER SHOWCASE-->
+<section id="member-showcase" class="py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col text-center">
+        <h1>Our Member</h1>
+        <hr class="w-25 mx-auto" />
+        <p class="lead">
+          Become a member today. Post your article and build our community.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        <img
+          src="{% static 'images/people1.jpg' %}"
+          class="rounded-circle img-thumbnail m-2"
+        />
+        <img
+          src="{% static 'images/people2.jpg' %}"
+          class="rounded-circle img-thumbnail m-2"
+        />
+        <img
+          src="{% static 'images/people3.jpg' %}"
+          class="rounded-circle img-thumbnail m-2"
+        />
+        <img
+          src="{% static 'images/people4.jpg' %}"
+          class="rounded-circle img-thumbnail m-2"
+        />
+        <img
+          src="{% static 'images/people5.jpg' %}"
+          class="rounded-circle img-thumbnail m-2"
+        />
+        <img
+          src="{% static 'images/people6.jpg' %}"
+          class="rounded-circle img-thumbnail m-2"
+        />
+        <img
+          src="{% static 'images/people7.jpg' %}"
+          class="rounded-circle img-thumbnail m-2"
+        />
+        <img
+          src="{% static 'images/people8.jpg' %}"
+          class="rounded-circle img-thumbnail m-2"
+        />
+        <img
+          src="{% static 'images/people9.jpg' %}"
+          class="rounded-circle img-thumbnail m-2"
+        />
+        <img
+          src="{% static 'images/people10.jpg' %}"
+          class="rounded-circle img-thumbnail m-2"
+        />
+        <img
+          src="{% static 'images/people11.jpg' %}"
+          class="rounded-circle img-thumbnail m-2"
+        />
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col text-center">
+        <a href="authors.html" class="btn btn-outline-dark mx-auto">
+          View More Member
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END MEMBER SHOWCASE-->
+{% endblock content %}

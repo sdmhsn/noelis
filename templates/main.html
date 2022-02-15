@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <link
+      rel="icon"
+      href="{% static 'images/favicon.png' %}"
+      type="image/png"
+    />
+    <link rel="stylesheet" href="{% static 'styles/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'font/bootstrap-icons.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+  </head>
+  <body>
+    <!-- START NAVBAR -->
+    {% include 'navbar.html' %}
+    <!-- END NAVBAR -->
+
+    <!-- START MAIN CONTENT -->
+    {% block content %} {% endblock content %}
+    <!-- END MAIN CONTENT -->
+
+    <!-- START FOOTER -->
+    {% include 'footer.html' %}
+    <!-- END FOOTER -->
+
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+  </body>
+</html>
