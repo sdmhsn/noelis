@@ -1,0 +1,140 @@
+body {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+/*  NAVBAR  */
+#main-navbar .nav-link {
+  border-bottom: 5px solid #f8f9fa;
+  color: gray;
+}
+#main-navbar .nav-link:hover,
+#main-navbar a.active {
+  border-bottom: 5px solid #212529;
+  color: black;
+}
+
+/* LOGO */
+.main-logo {
+  height: 100px;
+  margin-bottom: -70px; /* Supaya logo offset ke bawah */
+}
+.small-logo {
+  height: 60px; /* Untuk logo kecil di footer */
+}
+
+/*  MAIN SLIDER - Halaman Home  */
+#main-navbar {
+  z-index: 100; /* Agar logo tidak tertutup slider */
+}
+
+#main-slide .carousel-item {
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 90vh;
+  background-attachment: fixed;
+}
+
+#main-slide h1 {
+  margin-top: 50vh; /* Posisikan teks di tengah slider */
+}
+
+#slide1 {
+  background-image: url('../images/slide1.jpg');
+}
+
+#slide2 {
+  background-image: url('../images/slide2.jpg');
+}
+
+#slide3 {
+  background-image: url('../images/slide3.jpg');
+}
+
+#slide4 {
+  background-image: url('../images/slide4.jpg');
+}
+
+/*  EXPLORE - Halaman Home  */
+#explore {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url('../images/explore-image.jpg');
+  background-position-y: -400px;
+}
+#explore .dark-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
+/*  MEMBER SHOWCASE - Halaman Home  */
+#member-showcase img {
+  width: 100px;
+}
+
+#member-showcase img:hover {
+  filter: brightness(120%);
+}
+
+/* HEADER IMAGE - Untuk selain halaman Home  */
+.header-image {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 300px;
+}
+.header-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 300px;
+}
+.header-image h1 {
+  margin-top: 120px;
+}
+
+/* HEADER IMAGE - Gambar untuk setiap halaman  */
+#articles-header {
+  background-image: url('../img/full-image7.jpg');
+  background-position-y: -400px;
+}
+#authors-header {
+  background-image: url('../img/join.jpg');
+  background-position-y: -200px;
+}
+#login-header {
+  background-image: url('../img/full-image10.jpg');
+  background-position-y: -100px;
+}
+
+/* ARTICLES LIST - mengatur efek underscore di link */
+#articles a {
+  text-decoration: none;
+}
+
+#articles a:hover {
+  text-decoration: underline;
+}
+
+/* ARTICLE LIST - mengatur efek underscore di link */
+#article a {
+  text-decoration: none;
+}
+
+#article a:hover {
+  text-decoration: underline;
+}
+
+/* MEMBER LIST - Halaman Authors */
+#member-list .card-body img {
+  width: 125px;
+  margin-top: -80px;
+}
+
+/*-- Nonaktifkan XXL Breakpoint (opsional) --*/
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
