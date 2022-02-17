@@ -1,4 +1,7 @@
-{% extends 'main.html' %} {% load static %} {% block content %}
+{% extends 'main.html' %}
+{% load static %} 
+
+{% block content %}
 <!-- START HEADER -->
 <header id="articles-header" class="header-image text-white d-block">
   <div class="header-overlay d-flex">
@@ -33,175 +36,67 @@
     <div class="row">
       <div class="col-md-8">
         <!-- START ARTICLE LISTS -->
-        <h1 class="display-5">Latest Articles</h1>
-        <hr />
-        <div class="row py-2 d-flex">
-          <div class="col-md-5 text-center">
-            <img src="img/full-image8.jpg" alt="" class="img-fluid mt-2" />
-          </div>
-          <div class="col-md-7 text-center text-md-start mt-3 mt-md-0">
-            <h3>
-              <a href="article.html" class="text-dark">
-                For a More Creative Brain Follow These 5 Steps</a
-              >
-            </h3>
-            <p>
-              Nearly all great ideas follow a similar creative process and this
-              article explains how this process works. Understanding this is
-              important because creative thinking is one of the most useful
-              skills you can possess. Nearly every problem you...
-            </p>
-            <div class="text-muted">
-              <small>James Clear</small> - <small> 14 September 2022 </small> -
-              <small> 10 Comments</small>
+        {% if queryset %}
+          <h1 class="display-5">{{ cats }}</h1>
+          <hr />
+          {% for article in queryset %}
+            <div class="row py-2 d-flex">
+              <div class="col-md-5 text-center">
+                <img src="{{ article.thumbnail.url }}" alt="" class="img-fluid mt-2" />
+              </div>
+              <div class="col-md-7 text-center text-md-start mt-3 mt-md-0">
+                <h3>
+                  <a href="{% url 'article' %}" class="text-dark">
+                    {{ article.title }}</a
+                  >
+                </h3>
+                <p>
+                  {{ article.body | safe | truncatechars:150 }}
+                </p>
+                <div class="text-muted">
+                  <small>James Clear</small> - <small> {{ article.created }} </small> -
+                  <small> 10 Comments</small>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <hr />
-
-        <div class="row py-2 d-flex">
-          <div class="col-md-5 text-center">
-            <img src="img/thumbnail2.jpg" alt="" class="img-fluid mt-2" />
-          </div>
-          <div class="col-md-7 text-center text-md-start mt-3 mt-md-0">
-            <h3>
-              <a href="article.html" class="text-dark">
-                The Proven Path to Doing Unique and Meaningful Work</a
-              >
-            </h3>
-            <p>
-              In June of 2004, Arno Rafael Minkkinen stepped up to the
-              microphone at the New England School of Photography to deliver the
-              commencement speech...
-            </p>
-            <div class="text-muted">
-              <small>Edi Kurniawan</small> -
-              <small> 09 September 2022 </small> -
-              <small> 17 Comments</small>
-            </div>
-          </div>
-        </div>
-        <hr />
-
-        <div class="row py-2 d-flex">
-          <div class="col-md-5 text-center">
-            <img src="img/thumbnail3.jpg" alt="" class="img-fluid mt-2" />
-          </div>
-          <div class="col-md-7 text-center text-md-start mt-3 mt-md-0">
-            <h3>
-              <a href="article.html" class="text-dark">
-                Creativity Is a Process, Not an Event</a
-              >
-            </h3>
-            <p>
-              In 1666, one of the most influential scientists in history was
-              strolling through a garden when he was struck with a flash of
-              creative brilliance that would change the world...
-            </p>
-            <div class="text-muted">
-              <small>Diana Rahayu</small> - <small> 17 Agustus 2022 </small> -
-              <small> 45 Comments</small>
-            </div>
-          </div>
-        </div>
-        <hr />
-
-        <div class="row py-2 d-flex">
-          <div class="col-md-5 text-center">
-            <img src="img/thumbnail4.jpg" alt="" class="img-fluid mt-2" />
-          </div>
-          <div class="col-md-7 text-center text-md-start mt-3 mt-md-0">
-            <h3>
-              <a href="article.html" class="text-dark">
-                The Ultimate Productivity Hack is Saying No</a
-              >
-            </h3>
-            <p>
-              The ultimate productivity hack is saying no. Not doing something
-              will always be faster than doing it. This statement reminds me of
-              the old computer programming saying, “Remember that there is no
-              code faster than no code.”...
-            </p>
-            <div class="text-muted">
-              <small>Prayitna Warsa Ardianto</small> -
-              <small> 29 Juni 2022 </small> -
-              <small> 31 Comments</small>
-            </div>
-          </div>
-        </div>
-        <hr />
-
-        <div class="row py-2 d-flex">
-          <div class="col-md-5 text-center">
-            <img src="img/thumbnail5.jpg" alt="" class="img-fluid mt-2" />
-          </div>
-          <div class="col-md-7 text-center text-md-start mt-3 mt-md-0">
-            <h3>
-              <a href="article.html" class="text-dark">
-                How Innovative Ideas Arise</a
-              >
-            </h3>
-            <p>
-              In 2010, Thomas Thwaites decided he wanted to build a toaster from
-              scratch. He walked into a shop, purchased the cheapest toaster he
-              could find, and promptly went home and broke it down piece by
-              piece...
-            </p>
-            <div class="text-muted">
-              <small>Shakila Yuliarti</small> -
-              <small> 11 Februari 2022 </small> -
-              <small> 5 Comments</small>
-            </div>
-          </div>
-        </div>
-        <hr />
-
-        <div class="row py-2 d-flex">
-          <div class="col-md-5 text-center">
-            <img src="img/thumbnail6.jpg" alt="" class="img-fluid mt-2" />
-          </div>
-          <div class="col-md-7 text-center text-md-start mt-3 mt-md-0">
-            <h3>
-              <a href="article.html" class="text-dark">
-                30 One-Sentence Stories From People Who Have Built Better
-                Habits</a
-              >
-            </h3>
-            <p>
-              In this article, I'd like to share 30 “one-sentence stories” about
-              building better habits. (They are not all exactly one sentence,
-              but they are very short.) None of these stories are mine. They
-              were sent to me by readers of Atomic Habits. My...
-            </p>
-            <div class="text-muted">
-              <small>Diana Rahayu</small> - <small> 26 November 2017 </small> -
-              <small> 59 Comments</small>
-            </div>
-          </div>
-        </div>
-        <!-- END ARTICLE LISTS -->
-
-        <hr />
-
-        <!-- START PAGINATION -->
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link text-decoration-none" href="#">1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link text-dark text-decoration-none" href="#">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link text-dark text-decoration-none" href="#">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link text-dark text-decoration-none" href="#"
-              >Next</a
-            >
-          </li>
-        </ul>
-        <!-- END PAGINATION -->
+            
+            <hr />
+          {% endfor %}
+          <!-- START PAGINATION -->
+          
+          <!-- END PAGINATION -->
+        {% else %}
+          <h1 class="display-5">Latest Articles</h1>
+          <hr />
+            {% for article in articles  %}          
+              <div class="row py-2 d-flex">
+                <div class="col-md-5 text-center">
+                  <img src="{{ article.thumbnail.url }}" alt="" class="img-fluid mt-2" />
+                </div>
+                <div class="col-md-7 text-center text-md-start mt-3 mt-md-0">
+                  <h3>
+                    <a href="{% url 'article' %}" class="text-dark">
+                      {{ article.title }}</a
+                    >
+                  </h3>
+                  <p>
+                    {{ article.body | safe | truncatechars:150 }}
+                  </p>
+                  <div class="text-muted">
+                    <small>James Clear</small> - <small> {{ article.created }} </small> -
+                    <small> 10 Comments</small>
+                  </div>
+                </div>
+              </div>
+              
+              <hr />
+            {% endfor %}
+          <!-- START PAGINATION -->
+            
+          <!-- END PAGINATION -->
+        {% endif %}
       </div>
+
 
       <!-- SIDEBAR -->
       <div id="sidebar" class="col-md-4 mt-4">
@@ -280,51 +175,18 @@
           <div class="col">
             <h3 class="text-center">Post Category</h3>
             <ul class="list-group list-group-flush mt-3">
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center"
-              >
-                <a href="#" class="text-dark">Economy</a>
-                <span class="badge badge-primary badge-pill bg-dark">10</span>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center"
-              >
-                <a href="#" class="text-dark">Education</a>
-                <span class="badge badge-primary badge-pill bg-dark">17</span>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center"
-              >
-                <a href="#" class="text-dark">Habit</a>
-                <span class="badge badge-primary badge-pill bg-dark">7</span>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center"
-              >
-                <a href="#" class="text-dark">Music</a>
-                <span class="badge badge-primary badge-pill bg-dark">21</span>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center"
-              >
-                <a href="#" class="text-dark">Politic</a>
-                <span class="badge badge-primary badge-pill bg-dark">106</span>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center"
-              >
-                <a href="#" class="text-dark">Sport</a>
-                <span class="badge badge-primary badge-pill bg-dark">28</span>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center"
-              >
-                <a href="#" class="text-dark">Technology</a>
-                <span class="badge badge-primary badge-pill bg-dark">28</span>
-              </li>
+              {% for category in categories %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a href="{% url 'category' category %}" class="text-dark">{{ category.name }}</a>
+                  
+                    <span class="badge badge-primary badge-pill bg-dark">{{ category.article_set.count }}</span>
+                    
+                </li>
+              {% endfor %}
             </ul>
           </div>
         </div>
+
 
         <!-- LATEST COMMENTS -->
         <div id="latest-comments" class="row">
