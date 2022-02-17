@@ -1,33 +1,15 @@
-{% extends 'main.html' %} {% load static %} {% block content %}
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
 <!-- START SLIDER -->
 <header id="main-slide">
-  <div
-    id="mySlide"
-    class="carousel slide carousel-fade"
-    data-bs-ride="carousel"
-  >
+  <div id="mySlide" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button
-        type="button"
-        data-bs-target="#mySlide"
-        data-bs-slide-to="0"
-        class="active"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#mySlide"
-        data-bs-slide-to="1"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#mySlide"
-        data-bs-slide-to="2"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#mySlide"
-        data-bs-slide-to="3"
-      ></button>
+      <button type="button" data-bs-target="#mySlide" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#mySlide" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#mySlide" data-bs-slide-to="2"></button>
+      <button type="button" data-bs-target="#mySlide" data-bs-slide-to="3"></button>
     </div>
 
     <div class="carousel-inner text-white">
@@ -85,21 +67,11 @@
       </div>
     </div>
 
-    <button
-      class="carousel-control-prev"
-      type="button"
-      data-bs-target="#mySlide"
-      data-bs-slide="prev"
-    >
+    <button class="carousel-control-prev" type="button" data-bs-target="#mySlide" data-bs-slide="prev">
       <span class="carousel-control-prev-icon"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button
-      class="carousel-control-next"
-      type="button"
-      data-bs-target="#mySlide"
-      data-bs-slide="next"
-    >
+    <button class="carousel-control-next" type="button" data-bs-target="#mySlide" data-bs-slide="next">
       <span class="carousel-control-next-icon"></span>
       <span class="visually-hidden">Next</span>
     </button>
@@ -112,11 +84,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <img
-          src="{% static 'images/author1.jpg' %}"
-          alt=""
-          class="img-fluid mb-3 img-thumbnail"
-        />
+        <img src="{% static 'images/author1.jpg' %}" alt="" class="img-fluid mb-3 img-thumbnail" />
       </div>
       <div class="col-md-6 py-md-5">
         <figure class="text-center py-md-5">
@@ -151,11 +119,7 @@
         <a href="login.html" class="btn btn-outline-dark mb-3">Sign Up</a>
       </div>
       <div class="col-md-6 order-0 order-md-1">
-        <img
-          src="{% static 'images/join.jpg' %}"
-          alt=""
-          class="img-fluid mb-3 img-thumbnail"
-        />
+        <img src="{% static 'images/join.jpg' %}" alt="" class="img-fluid mb-3 img-thumbnail" />
       </div>
     </div>
   </div>
@@ -175,9 +139,7 @@
               other hand, you can find writing talents and facilitating
               publishers.
             </p>
-            <a href="{% url 'articles' %}" class="btn btn-outline-light"
-              >Find Out More</a
-            >
+            <a href="{% url 'articles' %}" class="btn btn-outline-light">Find Out More</a>
           </div>
         </div>
       </div>
@@ -200,50 +162,17 @@
     </div>
     <div class="row">
       <div class="col text-center">
-        <img
-          src="{% static 'images/people1.jpg' %}"
-          class="rounded-circle img-thumbnail m-2"
-        />
-        <img
-          src="{% static 'images/people2.jpg' %}"
-          class="rounded-circle img-thumbnail m-2"
-        />
-        <img
-          src="{% static 'images/people3.jpg' %}"
-          class="rounded-circle img-thumbnail m-2"
-        />
-        <img
-          src="{% static 'images/people4.jpg' %}"
-          class="rounded-circle img-thumbnail m-2"
-        />
-        <img
-          src="{% static 'images/people5.jpg' %}"
-          class="rounded-circle img-thumbnail m-2"
-        />
-        <img
-          src="{% static 'images/people6.jpg' %}"
-          class="rounded-circle img-thumbnail m-2"
-        />
-        <img
-          src="{% static 'images/people7.jpg' %}"
-          class="rounded-circle img-thumbnail m-2"
-        />
-        <img
-          src="{% static 'images/people8.jpg' %}"
-          class="rounded-circle img-thumbnail m-2"
-        />
-        <img
-          src="{% static 'images/people9.jpg' %}"
-          class="rounded-circle img-thumbnail m-2"
-        />
-        <img
-          src="{% static 'images/people10.jpg' %}"
-          class="rounded-circle img-thumbnail m-2"
-        />
-        <img
-          src="{% static 'images/people11.jpg' %}"
-          class="rounded-circle img-thumbnail m-2"
-        />
+        <img src="{% static 'images/people1.jpg' %}" class="rounded-circle img-thumbnail m-2" />
+        <img src="{% static 'images/people2.jpg' %}" class="rounded-circle img-thumbnail m-2" />
+        <img src="{% static 'images/people3.jpg' %}" class="rounded-circle img-thumbnail m-2" />
+        <img src="{% static 'images/people4.jpg' %}" class="rounded-circle img-thumbnail m-2" />
+        <img src="{% static 'images/people5.jpg' %}" class="rounded-circle img-thumbnail m-2" />
+        <img src="{% static 'images/people6.jpg' %}" class="rounded-circle img-thumbnail m-2" />
+        <img src="{% static 'images/people7.jpg' %}" class="rounded-circle img-thumbnail m-2" />
+        <img src="{% static 'images/people8.jpg' %}" class="rounded-circle img-thumbnail m-2" />
+        <img src="{% static 'images/people9.jpg' %}" class="rounded-circle img-thumbnail m-2" />
+        <img src="{% static 'images/people10.jpg' %}" class="rounded-circle img-thumbnail m-2" />
+        <img src="{% static 'images/people11.jpg' %}" class="rounded-circle img-thumbnail m-2" />
       </div>
     </div>
     <div class="row mt-4">
