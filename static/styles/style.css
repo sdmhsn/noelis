@@ -96,15 +96,15 @@ body {
 
 /* HEADER IMAGE - Gambar untuk setiap halaman  */
 #articles-header {
-  background-image: url('../img/full-image7.jpg');
+  background-image: url('../images/full-image7.jpg');
   background-position-y: -400px;
 }
 #authors-header {
-  background-image: url('../img/join.jpg');
+  background-image: url('../images/join.jpg');
   background-position-y: -200px;
 }
 #login-header {
-  background-image: url('../img/full-image10.jpg');
+  background-image: url('../images/full-image10.jpg');
   background-position-y: -100px;
 }
 
