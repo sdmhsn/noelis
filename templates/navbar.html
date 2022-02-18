@@ -1,30 +1,16 @@
 {% load static %}
 
-<nav
-  id="main-navbar"
-  class="navbar navbar-expand-md navbar-light bg-light py-0"
->
+<nav id="main-navbar" class="navbar navbar-expand-md navbar-light bg-light py-0">
   <div class="container">
     <a class="navbar-brand" href="{% url 'index' %}">
       <span class="d-none">NOELIS</span>
-      {% url 'article' as article %}
-      <img
-        src="{% static 'images/noelis_logo.svg' %}"
-        class="main-logo d-none {% if request.path != article %} d-md-inline {% endif %}"
-        alt="noelis logo"
-      />
-      <img
-        src="{% static 'images/noelis_logo.svg' %}"
-        class="small-logo d-inline {% if request.path != article %} d-md-none {% endif %}"
-        alt="noelis logo"
-      />
+      {% url 'article' article.slug as article %}
+      <img src="{% static 'images/noelis_logo.svg' %}"
+        class="main-logo d-none {% if request.path != article %} d-md-inline {% endif %}" alt="noelis logo" />
+      <img src="{% static 'images/noelis_logo.svg' %}"
+        class="small-logo d-inline {% if request.path != article %} d-md-none {% endif %}" alt="noelis logo" />
     </a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-    >
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -32,35 +18,20 @@
       <ul class="navbar-nav ms-auto">
         {% url 'index' as index %}
         <li class="nav-item">
-          <a
-            class="nav-link p-4 {% if request.path == index %} active {% endif %}"
-            href="{% url 'index' %}"
-            >Home</a
-          >
+          <a class="nav-link p-4 {% if request.path == index %} active {% endif %}" href="{% url 'index' %}">Home</a>
         </li>
         {% url 'articles' as articles %}
         <li class="nav-item">
-          <a
-            class="nav-link p-4 {% if request.path == articles %} active {% endif %}"
-            href="{% url 'articles' %}"
-            >Articles</a
-          >
+          <a class="nav-link p-4 {% if request.path == articles %} active {% endif %}"
+            href="{% url 'articles' %}">Articles</a>
         </li>
         {% url 'authors' as authors %}
         <li class="nav-item">
-          <a
-            class="nav-link p-4 {% if request.path == authors %} active {% endif %}"
-            href="#"
-            >Authors</a
-          >
+          <a class="nav-link p-4 {% if request.path == authors %} active {% endif %}" href="#">Authors</a>
         </li>
         {% url 'login' as login %}
         <li class="nav-item">
-          <a
-            class="nav-link p-4 {% if request.path == login %} active {% endif %}"
-            href="#"
-            >Login</a
-          >
+          <a class="nav-link p-4 {% if request.path == login %} active {% endif %}" href="#">Login</a>
         </li>
       </ul>
     </div>
