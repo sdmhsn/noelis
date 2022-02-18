@@ -97,7 +97,7 @@ body {
 /* HEADER IMAGE - Gambar untuk setiap halaman  */
 #articles-header {
   background-image: url('../images/full-image7.jpg');
-  background-position-y: -400px;
+  background-position-y: -300px;
 }
 #authors-header {
   background-image: url('../images/join.jpg');
