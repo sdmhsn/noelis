@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<section id="article">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <article class="py-2">
+                    <h1>{{ article.title }}</h1>
+                    <div class="text-muted">
+                        <small> xxx </small> -
+                        <small> {{ article.created }} </small> -
+                        <small> 4 Comments</small>
+                    </div>
+                    <div class=" p-4 text-center">
+                        <img src="{{ article.thumbnail.url }}" class="img-fluid" alt="{{ article.thumbnail }}">
+                    </div>
+                    {{ article.body|safe }}
+                </article>
+                <hr>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
