@@ -3,5 +3,8 @@ from .models import Article, Category
 
 
 # Register your models here.
-admin.site.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    readonly_fields = ['slug']
+
+admin.site.register(Article, ArticleAdmin)
 admin.site.register(Category)
