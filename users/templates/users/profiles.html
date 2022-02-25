@@ -1,0 +1,82 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <!-- START HEADER -->
+    <header id="authors-header" class="header-image text-white d-block">
+      <div class="header-overlay d-flex">
+        <div class="container align-self-center">
+          <h1 class="text-center mt-0">Search for <span>Authors</span></h1>
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <form action="{% url 'users' %}" method="GET" id="searchForm">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search by author name and location"
+                    aria-label="Search Article" aria-describedby="button-addon2" name="search_query"
+                    value="{{ search_query }}" />
+                  <input type="submit" class="btn btn-dark border-secondary" value="Search">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  <!-- END HEADER -->
+
+  <!-- START AUTHOR CONTAINER -->
+    <section id="member-list" class="py-5 text-center">
+      <div class="container">
+        <div class="row">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endfor %}
+          {% endif %}
+          <div class="col text-center">
+            <h1>Member List</h1>
+            <hr class="w-25 mx-auto" />
+            <p class="lead">
+              Connect with other authors in a vast community, and participate
+              with us!
+            </p>
+          </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+          {% for author in authors %}
+          <div class="col mt-3">
+            <a href="{% url 'author' author.id %}" class="text-dark text-decoration-none">
+              <div class="card h-100">
+                <img class="card-img-top" src="{{ author.cover_image.url }}" style="height: 200px;" />
+                <div class="card-body">
+                  <img src="{{ author.profile_image.url }}" class="rounded-circle img-thumbnail"
+                    style="width: 125px; height: 125px;" />
+                  <h5 class="card-title">{{ author.name }}</h5>
+                  <ul class="list-unstyled text-start my-4">
+                    <li class="m-2 ms-3">
+                      <i class="bi-briefcase-fill me-2"></i>{{ author.job_profile }}
+                    </li>
+                    <li class="m-2 ms-3">
+                      <i class="bi-house-fill me-2"></i>{{ author.location }}
+                    </li>
+                  </ul>
+                  <p class="card-text">
+                    {{ author.short_intro|truncatechars:90 }}
+                  </p>
+                </div>
+              </div>
+            </a>
+
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- START PAGINATION -->
+        {% include 'pagination.html' with queryset=authors custom_range=custom_range %}
+      <!-- END PAGINATION -->
+    </section>
+  <!-- END AUTHOR CONTAINER -->
+{% endblock content %}

@@ -1,0 +1,123 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <!-- START AUTHOR CONTAINER -->
+  <section id="member-list" class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mt-3 me-md-5 text-center px-0 m-auto">
+          <div class="card">
+            <img class="card-img-top" src="{{ profile.cover_image.url }}" />
+            <div class="card-body">
+              <img src="{{ profile.profile_image.url }}" class="rounded-circle img-thumbnail img-fluid" style="width: 125px; height: 125px;" />
+              <h5 class="card-title">{{ profile.name }}</h5>
+              <a href="#">
+                <a href="{% url 'edit-account' %}" class="badge rounded-pill bg-dark text-decoration-none text-white"><i class="bi bi-pencil-square me-2"></i>Edit</a>
+              </a>
+              <ul class="list-unstyled text-start my-4">
+                <li class="m-2 ms-3">
+                  <i class="bi-briefcase-fill me-2"></i>{{ profile.job_profile }}
+                </li>
+                <li class="m-2 ms-3">
+                  <i class="bi-house-fill me-2"></i>{{ profile.location }}
+                </li>
+              </ul>
+              <p class="card-text">
+                <div style="white-space: nowrap" class="py-3">
+                  {% if profile.social_facebook %}
+                  <a href="{{ profile.social_facebook }}" class="text-dark text-decoration-none me-2" target="_blank">
+                    <i class="bi-facebook fs-2"></i>
+                  </a>
+                  {% endif %}
+
+                  {% if profile.social_twitter %}
+                  <a href="{{ profile.social_twitter }}" class="text-dark text-decoration-none me-2" target="_blank">
+                    <i class="bi-twitter fs-2"></i>
+                  </a>
+                  {% endif %}
+
+                  {% if profile.social_website %}
+                  <a href="{{ profile.social_website }}" class="text-dark text-decoration-none me-2" target="_blank">
+                    <i class="bi-globe fs-2"></i>
+                  </a>
+                  {% endif %}
+
+                  {% if profile.social_instagram %}
+                  <a href="{{ profile.social_instagram }}" class="text-dark text-decoration-none me-2" target="_blank">
+                    <i class="bi-instagram fs-2"></i>
+                  </a>
+                  {% endif %}
+
+                  {% if profile.social_linkedin %}
+                  <a href="{{ profile.social_linkedin }}" class="text-dark text-decoration-none me-2" target="_blank">
+                    <i class="bi-linkedin fs-2"></i>
+                  </a>
+                  {% endif %}
+
+                  {% if profile.email %}
+                  <a href="mailto:{{ profile.email }}" class="text-dark text-decoration-none me-2" target="_blank">
+                    <i class="bi-envelope-fill fs-2"></i>
+                  </a>
+                  {% endif %}
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7 mt-3 border border-1 p-3 m-auto">
+          <h1>About me</h1>
+          <p>{{ profile.bio|linebreaksbr }}</p>
+          <div class="d-flex flex-row justify-content-between align-items-center">
+            <h1>Articles</h1>
+            <a href="{% url 'write-article' %}" class="badge rounded-pill bg-dark text-decoration-none text-white"><i class="bi bi-plus-circle"></i> Write Article</a>
+          </div>
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+          {% for article in profile.article_set.all %}
+            <div class="d-flex flex-row justify-content-between align-items-center">
+              <div class="py-2 py-md-0">
+                <ul>
+                  <li>
+                    <a href="{% url 'article' article.slug %}" title="{{ article.title }}" class="text-decoration-none text-dark">
+                      {{ article.title|truncatechars:80 }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="text-end d-flex flex-column flex-md-row">
+                <a href="{% url 'edit-article' article.id %}" class="badge rounded-pill bg-dark text-decoration-none text-white my-1 my-md-0">Edit</a>
+                <a href="#" class="badge rounded-pill bg-dark text-decoration-none text-white my-1 my-md-0" data-bs-toggle="modal" data-bs-target="#delete-{{ article.id }}">Delete</a>
+
+                <!-- Modal -->
+                <div class="modal fade" id="delete-{{ article.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete article confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p class="text-start">Are you sure want to delete <strong>{{ article.title }}</strong> article?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <a href="{% url 'delete-article' article.id %}" class="btn btn-dark">submit</a>
+                        <input type="button" class="btn btn-secondary" data-bs-dismiss="modal" value="cancel">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END AUTHOR CONTAINER -->
+{% endblock content %}

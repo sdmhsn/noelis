@@ -1,0 +1,84 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <!-- START AUTHOR CONTAINER -->
+    <section id="member-list" class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mt-3 me-md-5 text-center px-0 m-auto">
+            <div class="card">
+              <img class="card-img-top" src="{{ author.cover_image.url }}" />
+              <div class="card-body">
+                <img src="{{ author.profile_image.url }}" class="rounded-circle img-thumbnail"  style="width: 125px; height: 125px;" />
+                <h5 class="card-title">{{ author.name }}</h5>
+                <ul class="list-unstyled text-start my-4">
+                  <li class="m-2 ms-3">
+                    <i class="bi-briefcase-fill me-2"></i>{{ author.job_profile }}
+                  </li>
+                  <li class="m-2 ms-3">
+                    <i class="bi-house-fill me-2"></i>{{ author.location }}
+                  </li>
+                </ul>
+                <p class="card-text">
+                <div style="white-space: nowrap" class="py-3">
+                  {% if author.social_facebook %}
+                    <a href="{{ author.social_facebook }}" class="text-dark text-decoration-none me-2" target="_blank">
+                      <i class="bi-facebook fs-2"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if author.social_twitter %}
+                    <a href="{{ author.social_twitter }}" class="text-dark text-decoration-none me-2" target="_blank">
+                      <i class="bi-twitter fs-2"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if author.social_website %}
+                    <a href="{{ author.social_website }}" class="text-dark text-decoration-none me-2" target="_blank">
+                      <i class="bi-globe fs-2"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if author.social_instagram %}
+                    <a href="{{ author.social_instagram }}" class="text-dark text-decoration-none me-2" target="_blank">
+                      <i class="bi-instagram fs-2"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if author.social_linkedin %}
+                    <a href="{{ author.social_linkedin }}" class="text-dark text-decoration-none me-2" target="_blank">
+                      <i class="bi-linkedin fs-2"></i>
+                    </a>
+                  {% endif %}
+
+                </div>
+                </p>
+                
+                {% if author != request.user.profile %}
+                  <div class="d-grid gap-2 mt-3">
+                    <a href="mailto:{{ author.email }}" type="submit" class="btn btn-block btn-dark">Send Message</a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7 mt-3 border border-1 p-5 m-auto">
+            <h1>About me</h1>
+            <p>{{ author.bio }}</p>
+            <h1>Articles</h1>
+            {% for article in author.article_set.all|dictsort:"created" %}
+              <ul>
+                <li>
+                  <a href="{% url 'article' article.slug %}" class="text-decoration-none text-dark">
+                    {{ article.title }}
+                  </a>
+                </li>
+              </ul>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- END AUTHOR CONTAINER -->
+{% endblock content %}

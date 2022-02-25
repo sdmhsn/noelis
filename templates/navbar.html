@@ -4,11 +4,16 @@
   <div class="container">
     <a class="navbar-brand" href="{% url 'index' %}">
       <span class="d-none">NOELIS</span>
-      {% url 'article' article.slug as article %}
-      <img src="{% static 'images/noelis_logo.svg' %}"
-        class="main-logo d-none {% if request.path != article %} d-md-inline {% endif %}" alt="noelis logo" />
-      <img src="{% static 'images/noelis_logo.svg' %}"
-        class="small-logo d-inline {% if request.path != article %} d-md-none {% endif %}" alt="noelis logo" />
+      {% url 'index' as index %}
+      {% url 'articles' as articles %}
+      {% url 'users' as authors %}
+      {% url 'login' as login %}
+      {% if request.path == index or request.path == articles or request.path == authors or request.path == login%}
+        <img src="{% static 'images/noelis_logo.svg' %}" class="main-logo d-none d-md-inline" alt="noelis logo" />
+        <img src="{% static 'images/noelis_logo.svg' %}" class="small-logo d-inline d-md-none" alt="noelis logo" /> 
+      {% else %}
+        <img src="{% static 'images/noelis_logo.svg' %}" class="small-logo d-inline" alt="noelis logo" />
+      {% endif %}
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
@@ -22,17 +27,26 @@
         </li>
         {% url 'articles' as articles %}
         <li class="nav-item">
-          <a class="nav-link p-4 {% if request.path == articles %} active {% endif %}"
-            href="{% url 'articles' %}">Articles</a>
+          <a class="nav-link p-4 {% if request.path == articles %} active {% endif %}" href="{% url 'articles' %}">Articles</a>
         </li>
-        {% url 'authors' as authors %}
+        {% url 'users' as authors %}
         <li class="nav-item">
-          <a class="nav-link p-4 {% if request.path == authors %} active {% endif %}" href="#">Authors</a>
+          <a class="nav-link p-4 {% if request.path == authors %} active {% endif %}" href="{% url 'users' %}">Authors</a>
         </li>
+        {% url 'account' as account %}
         {% url 'login' as login %}
-        <li class="nav-item">
-          <a class="nav-link p-4 {% if request.path == login %} active {% endif %}" href="#">Login</a>
-        </li>
+        {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link p-4 {% if request.path == account %} active {% endif %}" href="{% url 'account' %}">Account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link p-4" href="{% url 'logout' %}">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link p-4 {% if request.path == login %} active {% endif %}" href="{% url 'login' %}">Login</a>
+          </li>
+        {% endif %}
       </ul>
     </div>
   </div>

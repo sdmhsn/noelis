@@ -2,210 +2,181 @@
 {% load static %}
 
 {% block content %}
-<!-- START HEADER -->
-<header id="articles-header" class="header-image text-white d-block">
-  <div class="header-overlay d-flex">
-    <!-- START SEARCH FORM -->
-    <div class="container align-self-center">
-      <h1 class="text-center mt-0">Search for <span>Articles</span></h1>
-      <div class="row">
-        <div class="col">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search by article title, author or category"
-              aria-label="Search Article" aria-describedby="button-addon2" />
-            <button class="btn btn-dark" type="button" id="button-addon2">
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- END SEARCH FORM -->
-  </div>
-</header>
-<!-- END HEADER -->
-
-<!-- START ARTICLE CONTAINER -->
-<section id="articles">
-  <div class="container py-5">
-    <div class="row">
-      <div class="col-md-8">
-        <!-- START ARTICLE LISTS -->
-        {% if queryset %}
-        <h1 class="display-5">{{ cats|capfirst }}</h1>
-        <hr />
-        {% for article in queryset %}
-        <div class="row py-2 d-flex">
-          <div class="col-md-5 text-center">
-            <img src="{{ article.thumbnail.url }}" alt="" class="img-fluid mt-2" />
-          </div>
-          <div class="col-md-7 text-center text-md-start mt-3 mt-md-0">
-            <h3>
-              <a href="{% url 'article' article.slug %}" class="text-dark">
-                {{ article.title }}</a>
-            </h3>
-            <p>
-              {{ article.body|safe|truncatechars:200 }}
-            </p>
-            <div class="text-muted">
-              <small>James Clear</small> - <small> {{ article.created }} </small> -
-              <small> 10 Comments</small>
+  <!-- START HEADER -->
+    <header id="articles-header" class="header-image text-white d-block">
+      <div class="header-overlay d-flex">
+        <!-- START SEARCH FORM -->
+        <div class="container align-self-center">
+          <h1 class="text-center mt-0">Search for <span>Articles</span></h1>
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <form action="{% url 'articles' %}" method="GET" id="searchForm">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search by article title, author or category"
+                    aria-label="Search Article" aria-describedby="button-addon2" name="search_query" value="{{ search_query }}">
+                  <input type="submit" class="btn btn-dark border-secondary" value="Search">
+                </div>
+              </form>
             </div>
           </div>
         </div>
-        <hr />
-        {% endfor %}
-        <!-- START PAGINATION -->
-
-        <!-- END PAGINATION -->
-        {% else %}
-        <h1 class="display-5">Latest Articles</h1>
-        <hr />
-        {% for article in articles %}
-        <div class="row py-2 d-flex">
-          <div class="col-md-5 text-center">
-            <img src="{{ article.thumbnail.url }}" alt="" class="img-fluid mt-2" />
-          </div>
-          <div class="col-md-7 text-center text-md-start mt-3 mt-md-0">
-            <h3>
-              <a href="{% url 'article' article.slug %}" class="text-dark">
-                {{ article.title }}</a>
-            </h3>
-            <p>
-              {{ article.body|safe|truncatechars:200 }}
-            </p>
-            <div class="text-muted">
-              <small>James Clear</small> - <small> {{ article.created }} </small> -
-              <small> 10 Comments</small>
-            </div>
-          </div>
-        </div>
-        <hr />
-        {% endfor %}
-        <!-- START PAGINATION -->
-
-        <!-- END PAGINATION -->
-        {% endif %}
+        <!-- END SEARCH FORM -->
       </div>
+    </header>
+  <!-- END HEADER -->
 
-      <!-- SIDEBAR -->
-      <div id="sidebar" class="col-md-4 mt-4">
-        <!-- POPULAR POST SLIDER-->
-        <div class="row mb-5">
-          <div class="col text-center">
-            <h3>Popular Articles</h3>
-            <div id="mySlide" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                {% for article in articles|slice:":3" %}
-                  {% if forloop.first %}
-                    <div class="carousel-item active">
-                      {% else %}
-                    <div class="carousel-item">
-                  {% endif %}
-                    <img class="w-100 img-thumbnail" src="{{ article.thumbnail.url }}" style=" width:100%; height: 200px !important;" />
-                    <div class="carousel-caption pb-0 m-0">
-                      <a href="{% url 'article' article.slug %}" class="text-dark">
-                        <p class="bg-light d-inline-block px-1">
-                          {{ article.title|truncatechars:50 }}
-                        </p>
-                      </a>
+  <!-- START ARTICLE CONTAINER -->
+    <section id="articles">
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-md-8">
+            <!-- START ARTICLE LISTS -->
+              {% if category %}
+                <h1 class="display-5">{{ category|title }}</h1>
+                <hr />
+                {% for article in articles %}
+                  <div class="row py-2 d-flex">
+                    <div class="col-md-5 text-center">
+                      <img src="{{ article.thumbnail.url }}" alt="" class="img-fluid mt-2" />
+                    </div>
+                    <div class="col-md-7 text-center text-md-start mt-3 mt-md-0">
+                      <h3>
+                        <a href="{% url 'article' article.slug %}" class="text-dark">
+                          {{ article.title }}</a>
+                      </h3>
+                      <p>
+                        {{ article.body|safe|truncatechars:200 }}
+                      </p>
+                      <div class="text-muted">
+                        <small>{{ article.owner.name }}</small> - <small>{{ article.created|date:"M d, Y" }}</small> -
+                        <small>{{ article.review_set.count }} Comment{{ article.review_set.count|pluralize:'s' }}</small>
+                      </div>
                     </div>
                   </div>
+                  <hr />
                 {% endfor %}
-                </div>
-
-                <button class="carousel-control-prev" type="button" data-bs-target="#mySlide" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#mySlide" data-bs-slide="next">
-                  <span class="carousel-control-next-icon"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- POST CATEGORY -->
-          <div class="row mb-5">
-            <div class="col">
-              <h3 class="text-center">Article Categories</h3>
-              <ul class="list-group list-group-flush mt-3">
-                {% for category in categories %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <a href="{% url 'category' category|lower  %}" class="text-dark">{{ category.name|capfirst }}</a>
-                  <span class="badge badge-primary badge-pill bg-dark">{{ category.article_set.count }}</span>
-                </li>
+                <!-- START PAGINATION -->
+                  {% include 'pagination.html' with queryset=articles custom_range=custom_range %}
+                <!-- END PAGINATION -->
+              {% else %}
+                {% if search_query %}
+                  <h1 class="display-5">Search Result</h1>
+                {% else %}
+                  <h1 class="display-5">Latest Articles</h1>
+                {% endif %}
+                <hr />
+                {% for article in articles %}
+                  <div class="row py-2 d-flex">
+                    <div class="col-md-5 text-center">
+                      <img src="{{ article.thumbnail.url }}" alt="" class="img-fluid mt-2" />
+                    </div>
+                    <div class="col-md-7 text-center text-md-start mt-3 mt-md-0">
+                      <h3>
+                        <a href="{% url 'article' article.slug %}" class="text-dark">
+                          {{ article.title }}</a>
+                      </h3>
+                      <p>
+                        {{ article.body|safe|truncatechars:200 }}
+                      </p>
+                      <div class="text-muted">
+                        <small>{{ article.owner.name }}</small> - <small>{{ article.created|date:"M d, Y" }}</small> - <small>{{ article.review_set.count }} Comment{{ article.review_set.count|pluralize:'s' }}</small>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
                 {% endfor %}
-              </ul>
-            </div>
+                <!-- START PAGINATION -->
+                  <div id="incSearch">
+                    {% include 'pagination.html' with queryset=articles custom_range=custom_range %}
+                  </div>
+                <!-- END PAGINATION -->
+              {% endif %}
+            <!-- END ARTICLE LISTS -->
           </div>
 
-          <!-- LATEST COMMENTS -->
-          <div id="latest-comments" class="row">
-            <div class="col">
-              <h3 class="text-center">Latest Comments</h3>
+          <!-- START SIDEBAR -->
+            <div id="sidebar" class="col-md-4 mt-4">
+              <div class="row mb-5">
+                <!-- START POPULAR POST SLIDER-->
+                  <div class="col text-center">
+                    <h3>Popular Articles</h3>
+                    <div id="mySlide" class="carousel slide" data-bs-ride="carousel">
+                      <div class="carousel-inner">
+                        {% for article in populars|slice:":5" %}
+                          {% if forloop.first %}
+                            <div class="carousel-item active">
+                              {% else %}
+                            <div class="carousel-item">
+                          {% endif %}
+                            <img class="w-100 img-thumbnail" src="{{ article.thumbnail.url }}" style=" width:100%; height: 200px !important;" />
+                            <div class="carousel-caption pb-0 m-0">
+                              <a href="{% url 'article' article.slug %}" class="text-dark">
+                                <p class="bg-light d-inline-block px-1">
+                                  {{ article.title|truncatechars:50 }}
+                                </p>
+                              </a>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      </div>
 
-              <div class="d-flex py-3 border-bottom">
-                <img class="me-3 rounded-circle img-thumbnail" src="img/people6.jpg"
-                  style="width: 50px; height: 50px" />
-                <div>
-                  <a href="#" class="text-dark">
-                    <p class="mb-0">
-                      Cras sit amet nibh libero in gravida nulla, Nulla vel metus.
-                    </p>
-                    <small class="text-muted align-self-end">
-                      15 September 2022</small>
-                  </a>
-                </div>
-              </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#mySlide" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#mySlide" data-bs-slide="next">
+                          <span class="carousel-control-next-icon"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                <!-- END POPULAR POST SLIDER-->
 
-              <div class="d-flex py-3 border-bottom">
-                <img class="me-3 rounded-circle img-thumbnail" src="img/people7.jpg"
-                  style="width: 50px; height: 50px" />
-                <div>
-                  <a href="#" class="text-dark">
-                    <p class="mb-0">
-                      Fusce tellus. Fusce dui leo, imperdiet in, aliquam sit amet,
-                      feugiat eu, orci.
-                    </p>
-                    <small class="text-muted align-self-end"> 29 Juni 2022</small>
-                  </a>
-                </div>
-              </div>
+                <!-- START POST CATEGORY -->
+                  <div class="row mb-5">
+                    <div class="col">
+                      <h3 class="text-center">Article Categories</h3>
+                      <ul class="list-group list-group-flush mt-3">
+                        {% for category in categories %}
+                          {% if category.article_set.count != 0 %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              <a href="{% url 'category' category|lower  %}" class="text-dark">{{ category.name|capfirst }}</a>
+                              <span class="badge badge-primary badge-pill bg-dark">{{ category.article_set.count }}</span>
+                            </li>
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                <!-- END POST CATEGORY -->
 
-              <div class="d-flex py-3 border-bottom">
-                <img class="me-3 rounded-circle img-thumbnail" src="img/people8.jpg"
-                  style="width: 50px; height: 50px" />
-                <div>
-                  <a href="#" class="text-dark">
-                    <p class="mb-0">
-                      Class aptent taciti sociosqu ad litora torquent per conubia
-                      nostra, per inceptos hymenaeos.
-                    </p>
-                    <small class="text-muted align-self-end"> 30 Mei 2022</small>
-                  </a>
-                </div>
-              </div>
-
-              <div class="d-flex py-3">
-                <img class="me-3 rounded-circle img-thumbnail" src="img/people9.jpg"
-                  style="width: 50px; height: 50px" />
-                <div>
-                  <a href="#" class="text-dark">
-                    <p class="mb-0">
-                      Mauris elementum mauris vitae tortor. Praesent dapibus.
-                    </p>
-                    <small class="text-muted align-self-end"> 7 Maret 2022</small>
-                  </a>
-                </div>
+                <!-- START LATEST COMMENTS -->
+                  <div id="latest-comments" class="row">
+                    <div class="col">
+                      <h3 class="text-center">Latest Comments</h3>
+                      {% for comment in reviews|slice:":5" %}
+                        <div class="d-flex py-3 border-bottom">
+                          <img class="me-3 rounded-circle img-thumbnail" src="{{ comment.owner.profile_image.url }}"
+                            style="width: 50px; height: 50px" />
+                          <div>
+                            <a href="{% url 'article' comment.article.slug %}" class="text-dark">
+                              <p class="mb-0">
+                                {{ comment.body }}
+                              </p>
+                              <small class="text-muted align-self-end">{{ comment.created }}</small>
+                            </a>
+                          </div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                <!-- END LATEST COMMENTS -->
               </div>
             </div>
-          </div>
+          <!-- END SIDEBAR -->
         </div>
       </div>
-    </div>
-  </div>
-</section>
-<!-- END ARTICLE CONTAINER -->
+    </section>
+  <!-- END ARTICLE CONTAINER -->
 {% endblock content %}

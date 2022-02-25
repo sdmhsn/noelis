@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <section id="member-list" class="py-5">
+        <div class="container">
+            <div class="row bg-light p-5 rounded-3">
+                <div class="col">
+                    <a href="{% url 'account' %}" class="text-dark text-decoration-none">
+                        <i class="bi bi-arrow-left-circle" style="font-size: 2rem;"></i>
+                    </a>
+                    <br>
+                    <br>
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    <h1>Edit Account</h1>
+                    <form method="POST" action="{% url 'edit-account' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Submit"  class="btn btn-block btn-dark">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

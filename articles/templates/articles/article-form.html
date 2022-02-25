@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+    <section id="member-list" class="py-5">
+        <div class="container">
+            <div class="row bg-light p-5 rounded-3">
+                <div class="col">
+                    <a href="{% url 'account' %}" class="text-dark text-decoration-none">
+                        <i class="bi bi-arrow-left-circle" style="font-size: 2rem;"></i>
+                    </a>
+                    <br>
+                    <br>
+                    {% url 'write-article' as writeArticle %}
+                    {% if request.path == writeArticle %}
+                        <h1>Write Article</h1>
+                    {% else %}
+                        <h1>Edit Article</h1>
+                        <!-- <h2>{{ request.path }}</h2> menampilkan output path saat ini -->
+                    {% endif %}
+                        
+                    {{ form.media }} <!-- PENTING!!! AGAR PLUGIN TINYMCE TERLOAD PADA TEMPLATE -->
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Submit"  class="btn btn-block btn-dark">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

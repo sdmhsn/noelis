@@ -4,14 +4,15 @@
 {% block content %}
 <section id="article">
     <div class="container py-5">
+        <!-- START MAIN ARTICLE -->
         <div class="row">
             <div class="col">
                 <article class="py-2">
                     <h1>{{ article.title }}</h1>
                     <div class="text-muted">
-                        <small> xxx </small> -
-                        <small> {{ article.created }} </small> -
-                        <small> 4 Comments</small>
+                        <small> {{ article.owner.name }} </small> -
+                        <small> {{ article.created|date:"M d, Y" }} </small> -
+                        <small> {{ article.review_set.count }} Comment{{ article.review_set.count|pluralize:'s' }}</small>
                     </div>
                     <div class=" p-4 text-center">
                         <img src="{{ article.thumbnail.url }}" class="img-fluid" alt="{{ article.thumbnail }}">
@@ -21,6 +22,122 @@
                 <hr>
             </div>
         </div>
+        <!-- END MAIN ARTICLE -->
+
+        <!-- START AUTHOR -->
+        <div class="d-flex align-items-start py-4">
+            <img class="me-3 img-thumbnail img-fluid" src="{{ article.owner.profile_image.url }}" style="width: 200px; height: 200px;" />
+            <div>
+                <h3>
+                    <a href="{% url 'author' article.owner.id %}" class="text-dark text-decoration-none">{{ article.owner.name }}</a>
+                </h3>
+                {{ article.owner.bio }}
+                <div class="pt-3" style="white-space: nowrap">
+                    {% if article.owner.social_facebook %}
+                    <a href="{{ article.owner.social_facebook }}" class="text-dark text-decoration-none me-2"
+                        target="_blank">
+                        <i class="bi-facebook fs-2"></i>
+                    </a>
+                    {% endif %}
+
+                    {% if article.owner.social_twitter %}
+                    <a href="{{ article.owner.social_twitter }}" class="text-dark text-decoration-none me-2"
+                        target="_blank">
+                        <i class="bi-twitter fs-2"></i>
+                    </a>
+                    {% endif %}
+
+                    {% if article.owner.social_website %}
+                    <a href="{{ article.owner.social_website }}" class="text-dark text-decoration-none me-2"
+                        target="_blank">
+                        <i class="bi-globe fs-2"></i>
+                    </a>
+                    {% endif %}
+
+                    {% if article.owner.social_instagram %}
+                    <a href="{{ article.owner.social_instagram }}" class="text-dark text-decoration-none me-2"
+                        target="_blank">
+                        <i class="bi-instagram fs-2"></i>
+                    </a>
+                    {% endif %}
+
+                    {% if article.owner.social_linkedin %}
+                    <a href="{{ article.owner.social_linkedin }}" class="text-dark text-decoration-none me-2"
+                        target="_blank">
+                        <i class="bi-linkedin fs-2"></i>
+                    </a>
+                    {% endif %}
+
+                    {% if article.owner.email %}
+                    <a href="mailto:{{ article.owner.email }}" class="text-dark text-decoration-none me-2"
+                        target="_blank">
+                        <i class="bi-envelope-fill fs-2"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr />
+        <!-- END AUTHOR -->
+
+        <!-- START LATEST COMMENTS -->
+        <section class="py-4">
+            <h2>Comments</h2>
+            {% for review in article.review_set.all %}
+                {% if review.body %}
+                    <div class="d-flex align-items-start mt-4">
+                        <a href="{% url 'author' review.owner.id %}" class="flex-shrink-0 me-3">
+                            <img class="rounded-circle img-thumbnail" src="{{ review.owner.profile_image.url }}" style="width: 50px; height: 50px" />
+                        </a>
+                        <div class="w-100">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="mt-0">{{ review.owner.name }}</h5>
+                                <small class="text-muted">{{ review.created }}</small>
+                            </div>
+                            <p>
+                                {{ review.body|linebreaksbr }}
+                            </p>
+                        </div>
+                    </div>
+                    <hr />
+                {% endif %}
+            {% endfor %}
+        </section>
+        <!-- END LATEST COMMENTS -->
+
+        <!--- START FEEDBACK -->
+        <section>
+            <h2>Leave a Reply and Feedback</h2>
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+            
+            <h3 class="py-3"> {{ article.vote_ratio }}% Postitive Feedback ({{ article.vote_total }} Vote{{ article.vote_total|pluralize:'s' }})</h3>
+
+            {% if request.user.profile.id in article.reviewers %}
+                <p>You have already submitted your comment for this article</p>
+            {% elif request.user.profile == article.owner %}
+                <p>You cannot comment your own article</p>
+            {% elif request.user.is_authenticated %}
+                <form action="{% url 'article' article.slug %}" method="POST">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {{ field.label_tag }}
+                        {{ field }}
+                    {% endfor %}
+                    <input type="submit" value="Add Review" class="btn btn-dark mt-3">
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}?next={{ request.path }}" class="text-dark">Please login to leave a comment</a>
+            {% endif %}
+        </section>
+        <!-- END FEEDBACK -->
+        
     </div>
 </section>
 {% endblock content %}

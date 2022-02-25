@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <!-- START HEADER IMAGE -->
+    <header id="login-header" class="header-image text-white">
+        <div class="header-overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="display-1">Enter New Password</h1>
+                        <p>Please enter your new password twice so we can verify you typed it in correctly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<!-- END HEADER IMAGE -->
+
+    <section id="member-list" class="py-5">
+        <div class="container my-5">
+            <div class="row bg-light p-5 rounded-3">
+                <div class="col">
+                    <div class="mb-3">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <input type="submit" value="Reset my password" class="btn btn-dark">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+    

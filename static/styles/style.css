@@ -132,6 +132,41 @@ body {
   margin-top: -80px;
 }
 
+/* PAGINATION */
+.page-item a {
+  color: rgb(0, 0, 0);
+}
+.page-item a:hover {
+  color: rgb(130, 130, 130);
+}
+.page-item.active .page-link {
+  z-index: 1;
+  color: rgb(255, 255, 255);
+  background-color: #212529;
+  border-color: #718393;
+}
+
+/* TINYMCE - figure image align */
+figure.align-left {
+  text-align: left;
+}
+figure.align-center {
+  text-align: center;
+}
+figure.align-right {
+  text-align: right;
+}
+figure.image img {
+  margin: 8px 8px 0 8px;
+}
+figure.image figcaption {
+  margin: 6px 8px 6px 8px;
+  text-align: center;
+  color: darkgray;
+  font-style: italic;
+  font-size: 18px;
+}
+
 /*-- Nonaktifkan XXL Breakpoint (opsional) --*/
 @media (min-width: 1200px) {
   .container {

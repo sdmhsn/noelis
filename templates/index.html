@@ -116,7 +116,7 @@
           designed to make sure you finish your article. Oh, and best of all,
           it’s free!
         </p>
-        <a href="login.html" class="btn btn-outline-dark mb-3">Sign Up</a>
+        <a href="{% url 'login' %}" class="btn btn-outline-dark mb-3">Sign Up</a>
       </div>
       <div class="col-md-6 order-0 order-md-1">
         <img src="{% static 'images/join.jpg' %}" alt="" class="img-fluid mb-3 img-thumbnail" />
@@ -177,7 +177,7 @@
     </div>
     <div class="row mt-4">
       <div class="col text-center">
-        <a href="authors.html" class="btn btn-outline-dark mx-auto">
+        <a href="{% url 'users' %}" class="btn btn-outline-dark mx-auto">
           View More Member
         </a>
       </div>
