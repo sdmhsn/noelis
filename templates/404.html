@@ -1,0 +1,14 @@
+{% extends 'main.html' %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>404</h1>
+      <h2>Page not found</h2>
+      <p>
+        The page you are looking for does not exist. Go back
+        <a href="{% url 'index' %}">Home</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock content %}

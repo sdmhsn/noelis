@@ -6,6 +6,7 @@ from .models import Article, Category, Review
 class ArticleAdmin(admin.ModelAdmin):
     readonly_fields = ['slug']
 
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Category)
 admin.site.register(Review)
